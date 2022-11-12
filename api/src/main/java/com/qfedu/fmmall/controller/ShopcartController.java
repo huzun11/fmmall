@@ -17,6 +17,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/shopcart")
 @Api(value = "提供购物车业务相关接口",tags = "购物车管理")
@@ -51,6 +53,14 @@ public class ShopcartController {
         return resultVO;
     }
 
+
+    @GetMapping("/listbycids")
+    @ApiImplicitParam(dataType = "String",name = "cids", value = "用户ID",required = true)
+    public ResultVO list(String cids, @RequestHeader("token")String token){
+        ResultVO resultVO = shoppingCartService.listShoppingCartBuCids(cids);
+        return resultVO;
+
+    }
 
 
 }
